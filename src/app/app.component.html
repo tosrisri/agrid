@@ -5,6 +5,8 @@
   #agGrid
     style="height: 300px; width: auto"
     class="ag-theme-balham"
+    [autoGroupColumnDef] = "autoGroupColumnDef"
+    [groupSelectsChildren] = "true"
     [rowData] = "rowData | async"
     rowSelection = multiple
     [columnDefs] = "columnDefs">

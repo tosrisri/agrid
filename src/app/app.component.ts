@@ -12,10 +12,19 @@ export class AppComponent {
   title = 'agrid';
 
   columnDefs = [
-    { headerName: "Name", field: "name"  , sortable: true, filter:true, checkboxSelection: true },
-    { headerName: "User Name", field: "username", sortable: true, filter:true },
+    { headerName: "Name", field: "name", rowGroup: true },
     { headerName: "Email", field: "email", sortable: true, filter:true }
   ];
+
+  autoGroupColumnDef = {
+    headerName: "User Name",
+    field: "username",
+    cellRenderer: 'agGroupCellRenderer',
+    cellRendererParams: {
+      checkbox: true
+    }
+  }
+
   rowData: any;
 
 constructor(private http: HttpClient) {
