@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient  } from "@angular/common/http";
+import { AgGridAngular } from "ag-grid-angular";
 
 @Component({
   selector: 'app-root',
@@ -7,6 +8,7 @@ import { HttpClient  } from "@angular/common/http";
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
+  @ViewChild("agGrid", {static:false }) agGrid: AgGridAngular;
   title = 'agrid';
 
   columnDefs = [
@@ -22,6 +24,13 @@ constructor(private http: HttpClient) {
 
 ngOnInit(){
   this.rowData = this.http.get("https://jsonplaceholder.typicode.com/users");
+}
+
+getSelectedRows() {
+  const selectedNodes = this.agGrid.api.getSelectedNodes();
+  const selectedData = selectedNodes.map(node => node.data);
+  const selectedDataStringPresentation = selectedData.map(node => node.name + ' ' + node.model).join(", ");
+  alert(`Selected Nodes: ${selectedDataStringPresentation}`);
 }
 
   // rowData = [
